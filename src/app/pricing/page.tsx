@@ -1,5 +1,6 @@
-"use client";
+'use client';
 
+import { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -8,6 +9,16 @@ import {
 } from "../../components/ui/table";
 
 export default function PricingPage() {
+  const [isMd, setIsMd] = useState(false);
+
+  // Detect window width on client only
+  useEffect(() => {
+    const handleResize = () => setIsMd(window.innerWidth >= 768);
+    handleResize(); // initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const modes = [
     {
       name: "Single Mode",
@@ -79,8 +90,8 @@ export default function PricingPage() {
                 className="text-black font-bold flex items-center justify-center 
                 px-4 py-4 md:px-6 md:py-10 tracking-wider text-sm md:text-base"
                 style={{
-                  writingMode: window.innerWidth >= 768 ? "vertical-rl" : "horizontal-tb",
-                  transform: window.innerWidth >= 768 ? "rotate(180deg)" : "none",
+                  writingMode: isMd ? "vertical-rl" : "horizontal-tb",
+                  transform: isMd ? "rotate(180deg)" : "none",
                   backgroundColor: mode.accent,
                 }}
               >
@@ -89,7 +100,6 @@ export default function PricingPage() {
 
               {/* RIGHT TABLE */}
               <div className="flex-1 bg-[#0f172a] p-4 md:p-8 overflow-x-auto">
-
                 <Table>
                   <TableBody>
                     {mode.plans.map((plan, i) => (
@@ -97,10 +107,7 @@ export default function PricingPage() {
                         key={i}
                         className="border-b border-white/5 hover:bg-white/5 transition-all duration-300"
                       >
-                        {/* SESSION NAME */}
                         <TableCell className="relative pl-6 md:pl-8 text-gray-300 text-sm md:text-base">
-
-                          {/* Accent Line */}
                           <span
                             className="absolute left-0 top-0 h-full w-[3px] opacity-80"
                             style={{
@@ -108,7 +115,6 @@ export default function PricingPage() {
                               boxShadow: `0 0 8px ${mode.accent}`,
                             }}
                           />
-
                           <div className="flex items-center gap-2 md:gap-3">
                             <span
                               className="w-2 h-2 rounded-full animate-pulse"
@@ -120,8 +126,6 @@ export default function PricingPage() {
                             {plan[0]}
                           </div>
                         </TableCell>
-
-                        {/* PRICE */}
                         <TableCell className="text-right font-semibold text-white pr-4 md:pr-6 text-sm md:text-base whitespace-nowrap">
                           {plan[1]}
                         </TableCell>
@@ -129,7 +133,6 @@ export default function PricingPage() {
                     ))}
                   </TableBody>
                 </Table>
-
               </div>
 
             </div>

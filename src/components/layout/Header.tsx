@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Link from "next/link";
 import Image from "next/image";
@@ -9,8 +9,7 @@ import { cn } from "../lib/utils";
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
-  const [search, setSearch] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); // keep menu state
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -19,8 +18,6 @@ export default function Header() {
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
   ];
-
- 
 
   return (
     <header className="w-full bg-transparent border-b border-blue-400/30 relative z-50">
@@ -35,9 +32,9 @@ export default function Header() {
             height={50}
             priority
           />
-        </Link>        
+        </Link>
 
-        {/* Desktop Navigation (hidden below 828px) */}
+        {/* Desktop Navigation */}
         <nav className="flex items-center gap-6 text-sm font-medium max-[827px]:hidden">
           {navLinks.map((link) => {
             const isActive = pathname === link.path;
@@ -62,7 +59,7 @@ export default function Header() {
           })}
         </nav>
 
-        {/* Hamburger (shows below 828px) */}
+        {/* Hamburger */}
         <button
           className="hidden max-[827px]:flex flex-col gap-1"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -76,8 +73,6 @@ export default function Header() {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="max-[827px]:block hidden bg-[#0f172a] border-t border-blue-400/20 px-6 py-6 space-y-6">
-
-          {/* Mobile Links */}
           <nav className="flex flex-col gap-4 text-sm font-medium">
             {navLinks.map((link) => {
               const isActive = pathname === link.path;
@@ -99,7 +94,6 @@ export default function Header() {
               );
             })}
           </nav>
-
         </div>
       )}
     </header>
