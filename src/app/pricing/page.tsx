@@ -1,10 +1,17 @@
 "use client";
 
+import {
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
+} from "../../components/ui/table";
+
 export default function PricingPage() {
   const modes = [
     {
       name: "Single Mode",
-      color: "bg-orange-500",
+      accent: "#f97316",
       glow: "hover:shadow-orange-500/40",
       plans: [
         ["Express Slot (15 Min)", "₹50"],
@@ -16,7 +23,7 @@ export default function PricingPage() {
     },
     {
       name: "Dual Mode",
-      color: "bg-blue-600",
+      accent: "#2563eb",
       glow: "hover:shadow-blue-500/40",
       plans: [
         ["Express Slot (15 Min)", "₹80 (₹40 per person)"],
@@ -28,7 +35,7 @@ export default function PricingPage() {
     },
     {
       name: "Big Mode",
-      color: "bg-green-600",
+      accent: "#16a34a",
       glow: "hover:shadow-green-500/40",
       plans: [
         ["Express Slot (15 Min)", "₹120"],
@@ -40,7 +47,7 @@ export default function PricingPage() {
     },
     {
       name: "SimDrive",
-      color: "bg-yellow-500",
+      accent: "#eab308",
       glow: "hover:shadow-yellow-500/40",
       plans: [
         ["One Session (15 Min)", "₹90"],
@@ -51,56 +58,90 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="pt-28 pb-20  text-white min-h-screen">
-      <div className="max-w-6xl mx-auto px-6">
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-16">
+    <div className="pt-24 md:pt-28 pb-16 md:pb-20 text-white min-h-screen">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-16">
           RespawnEdge Pricing
         </h1>
 
-        <div className="space-y-12">
+        <div className="space-y-8 md:space-y-12">
           {modes.map((mode, index) => (
             <div
               key={index}
-              className={`group flex border border-gray-700 rounded-xl overflow-hidden 
-              transition-all duration-300 transform 
+              className={`group flex flex-col md:flex-row border border-white/10 rounded-xl overflow-hidden
+              transition-all duration-300 transform
               hover:-translate-y-2 hover:shadow-2xl ${mode.glow}`}
             >
+
               {/* LEFT LABEL */}
               <div
-                className={`${mode.color} text-black font-bold flex items-center justify-center 
-                px-6 py-10 transition-transform duration-300 group-hover:scale-105`}
+                className="text-black font-bold flex items-center justify-center 
+                px-4 py-4 md:px-6 md:py-10 tracking-wider text-sm md:text-base"
                 style={{
-                  writingMode: "vertical-rl",
-                  transform: "rotate(180deg)",
+                  writingMode: window.innerWidth >= 768 ? "vertical-rl" : "horizontal-tb",
+                  transform: window.innerWidth >= 768 ? "rotate(180deg)" : "none",
+                  backgroundColor: mode.accent,
                 }}
               >
                 {mode.name.toUpperCase()}
               </div>
 
               {/* RIGHT TABLE */}
-              <div className="flex-1 bg-zinc-900 p-8 transition-colors duration-300 group-hover:bg-zinc-800">
-                <div className="space-y-4">
-                  {mode.plans.map((plan, i) => (
-                    <div
-                      key={i}
-                      className="flex justify-between border-b border-gray-700 pb-2 
-                      transition-all duration-200 hover:text-white hover:border-gray-500"
-                    >
-                      <span className="text-gray-400">{plan[0]}</span>
-                      <span className="font-semibold">{plan[1]}</span>
-                    </div>
-                  ))}
-                </div>
+              <div className="flex-1 bg-[#0f172a] p-4 md:p-8 overflow-x-auto">
+
+                <Table>
+                  <TableBody>
+                    {mode.plans.map((plan, i) => (
+                      <TableRow
+                        key={i}
+                        className="border-b border-white/5 hover:bg-white/5 transition-all duration-300"
+                      >
+                        {/* SESSION NAME */}
+                        <TableCell className="relative pl-6 md:pl-8 text-gray-300 text-sm md:text-base">
+
+                          {/* Accent Line */}
+                          <span
+                            className="absolute left-0 top-0 h-full w-[3px] opacity-80"
+                            style={{
+                              background: mode.accent,
+                              boxShadow: `0 0 8px ${mode.accent}`,
+                            }}
+                          />
+
+                          <div className="flex items-center gap-2 md:gap-3">
+                            <span
+                              className="w-2 h-2 rounded-full animate-pulse"
+                              style={{
+                                background: mode.accent,
+                                boxShadow: `0 0 8px ${mode.accent}`,
+                              }}
+                            />
+                            {plan[0]}
+                          </div>
+                        </TableCell>
+
+                        {/* PRICE */}
+                        <TableCell className="text-right font-semibold text-white pr-4 md:pr-6 text-sm md:text-base whitespace-nowrap">
+                          {plan[1]}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+
               </div>
+
             </div>
           ))}
         </div>
 
-        {/* Notes */}
-        <div className="mt-16 bg-red-600/20 border border-red-500 rounded-xl p-6 text-sm hover:bg-red-600/30 transition">
+        {/* NOTES */}
+        <div className="mt-12 md:mt-16 bg-red-600/20 border border-red-500 rounded-xl p-4 md:p-6 text-xs sm:text-sm hover:bg-red-600/30 transition">
           <p>• Seat sharing is not allowed in a single session.</p>
           <p>• ₹80 per extra person will be charged for shared SimDrive session.</p>
         </div>
+
       </div>
     </div>
   );

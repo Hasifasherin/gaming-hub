@@ -19,7 +19,7 @@ const Footer = () => {
           {/* Social Icons */}
           <div className="flex gap-4 mt-5">
             <a
-              href="#"
+              href="https://www.facebook.com/profile.php?id=61588408592195"
               className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-600 transition"
             >
               <FaFacebookF />
@@ -40,7 +40,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Discover */}
         <div>
           
         </div>
@@ -50,8 +49,8 @@ const Footer = () => {
   <h3 className="text-white font-semibold mb-4">Company</h3>
   <ul className="space-y-3 text-sm">
     <li><Link href="/about" className="hover:text-white">About Us</Link></li>
-    <li><Link href="/careers" className="hover:text-white">Careers</Link></li>
-    <li><Link href="/blog" className="hover:text-white">Blog</Link></li>
+    <li><Link href="/games" className="hover:text-white">Games</Link></li>
+    <li><Link href="/pricing" className="hover:text-white">Pricing</Link></li>
     <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
   </ul>
 </div>

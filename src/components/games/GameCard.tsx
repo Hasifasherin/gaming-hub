@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Game } from "../../types/game";
+import { Card, CardContent } from "../ui/card";
 
 interface Props {
   game: Game;
@@ -7,35 +8,46 @@ interface Props {
 
 export default function GameCard({ game }: Props) {
   return (
-    <Link href="/pricing">
-      <div
-        className="relative rounded-xl p-[2px] 
-        bg-gradient-to-r from-blue-500 via-cyan-500 to-indigo-500 
-        shadow-[0_0_25px_rgba(59,130,246,0.6)]
-        hover:shadow-[0_0_35px_rgba(59,130,246,0.9)]
-        transition duration-300"
+    <Link href="/pricing" className="group block">
+      <Card
+        className="
+          overflow-hidden
+          bg-[#0a0f2a]/80
+          border border-[rgba(0,245,255,0.2)]
+          backdrop-blur-xl
+          transition-all duration-300
+          hover:shadow-[0_0_30px_rgba(0,245,255,0.6)]
+          hover:border-[rgba(0,245,255,0.6)]
+          hover:-translate-y-2
+        "
       >
-        {/* Actual Card */}
-        <div
-          className="bg-zinc-900 rounded-xl overflow-hidden 
-          transition duration-300 hover:scale-105"
-        >
-          <img
-            src={game.image}
-            alt={game.title}
-            className="h-60 w-full object-cover"
-          />
+        <CardContent className="p-0 relative">
 
-          <div className="p-5">
-            <h3 className="text-xl font-semibold mb-2 text-white">
+          {/* Image */}
+          <div className="overflow-hidden">
+            <img
+              src={game.image}
+              alt={game.title}
+              className="
+                h-48 sm:h-56 md:h-60 w-full object-cover
+                transition-transform duration-500
+                group-hover:scale-110
+              "
+            />
+          </div>
+
+          {/* Overlay Glow */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-70" />
+
+          {/* Title */}
+          <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
+            <h3 className="font-orbitron text-lg sm:text-xl text-white text-glow-neon">
               {game.title}
             </h3>
-            <p className="text-gray-400 text-sm">
-              {game.description}
-            </p>
           </div>
-        </div>
-      </div>
+
+        </CardContent>
+      </Card>
     </Link>
   );
 }
