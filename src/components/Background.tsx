@@ -50,7 +50,7 @@ export default function Background() {
   return (
     <canvas
       id="canvas"
-      className="fixed inset-0 -z-20"
+      className="fixed top-0 left-0 w-full h-[70vh] -z-20"
     />
   );
 }
