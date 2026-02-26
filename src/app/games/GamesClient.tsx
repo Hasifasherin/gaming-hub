@@ -1,16 +1,10 @@
-"use client";
+'use client';
 
-import { useSearchParams } from "next/navigation";
 import { games } from "../../data/games";
 import GameCard from "../../components/games/GameCard";
 
 export default function GamesClient() {
-  const searchParams = useSearchParams();
-  const search = searchParams.get("search") || "";
-
-  const filteredGames = games.filter((game) =>
-    game.title.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredGames = games; // No search filtering
 
   return (
     <>
